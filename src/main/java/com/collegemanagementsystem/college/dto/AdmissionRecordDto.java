@@ -1,12 +1,12 @@
 package com.collegemanagementsystem.college.dto;
 
-import lombok.*;
+import com.collegemanagementsystem.college.entities.StudentEntity;
+import jakarta.validation.constraints.Positive;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class AdmissionRecordDto {
-  private Long admissionId;
-  private Long fees;
+  private Long admissionRecordId;
+  @Positive private Integer fees;
+  private StudentEntity student;
 }

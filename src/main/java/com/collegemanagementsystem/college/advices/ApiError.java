@@ -1,16 +1,14 @@
 package com.collegemanagementsystem.college.advices;
 
-import java.util.List;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
-@Getter
-@Setter
 @Builder
+@Data
 public class ApiError {
+
   private HttpStatus httpStatus;
-  private String error;
-  private List<String> subError;
+  private String message;
+  private String subError;
 }

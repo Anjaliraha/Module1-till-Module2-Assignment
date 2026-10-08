@@ -3,11 +3,10 @@ package com.collegemanagementsystem.college.Annotation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class SpecialCharacterValidator
-    implements ConstraintValidator<SpecialCharacterNotAllowed, String> {
-
+public class NameValidator implements ConstraintValidator<NameValidation, String> {
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
-    return value.matches("[a-zA-Z ]+");
+    if (value.isBlank() && value.length() <= 0) return false;
+    return true;
   }
 }

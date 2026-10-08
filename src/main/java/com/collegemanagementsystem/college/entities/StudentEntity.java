@@ -2,43 +2,35 @@ package com.collegemanagementsystem.college.entities;
 
 import jakarta.persistence.*;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Getter
 @Setter
+@Getter
+@ToString
+@AllArgsConstructor
 @NoArgsConstructor
 public class StudentEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long studentId;
 
-  private String studentName;
-
-  @ManyToMany
-  @JoinTable(
-      name = "Student_Subject",
-      joinColumns = @JoinColumn(name = "student_id"),
-      inverseJoinColumns = @JoinColumn(name = "subject_id"),
-      uniqueConstraints =
-          @UniqueConstraint(
-              name = "uk_student_subject",
-              columnNames = {"student_id", "subject_id"}))
-  private List<SubjectEntity> subjectList;
+  private String name;
 
   @ManyToMany
   @JoinTable(
       name = "Student_Professor",
       joinColumns = @JoinColumn(name = "student_id"),
-      inverseJoinColumns = @JoinColumn(name = "professor_id"),
-      uniqueConstraints =
-          @UniqueConstraint(
-              name = "uk_student_professor",
-              columnNames = {"student_id", "professor_id"}))
-  private List<ProfessorEntity> professorList;
+      inverseJoinColumns = @JoinColumn(name = "professor_id"))
+  List<ProfessorEntity> professorEntities;
 
-  @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
-  private AdmissionRecordEntity admissionRecord;
+  @JoinTable(
+      name = "Student_Subject",
+      joinColumns = @JoinColumn(name = "student_id"),
+      inverseJoinColumns = @JoinColumn(name = "subject_id"))
+  @ManyToMany
+  List<SubjectEntity> subjectEntityList;
+
+  @OneToOne(mappedBy = "student")
+  private AdmissionRecordEntity admissionRecordEntity;
 }

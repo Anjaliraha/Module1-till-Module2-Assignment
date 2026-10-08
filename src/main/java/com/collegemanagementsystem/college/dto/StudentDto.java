@@ -1,24 +1,19 @@
 package com.collegemanagementsystem.college.dto;
 
-import com.collegemanagementsystem.college.Annotation.SpecialCharacterNotAllowed;
+import com.collegemanagementsystem.college.entities.ProfessorEntity;
+import com.collegemanagementsystem.college.entities.SubjectEntity;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import java.util.List;
-import lombok.*;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class StudentDto {
   private Long studentId;
 
-  @NotNull(message = "Please enter the studentName")
-  @Size(min = 4, max = 20, message = "Please enter the name in size limit")
-  @SpecialCharacterNotAllowed
-  private String studentName;
+  @NotNull(message = "Student name cannot be null")
+  private String name;
 
-  private List<SubjectDto> subjectList;
-  private List<ProfessorDto> professorList;
-  private AdmissionRecordDto admissionRecord;
+  List<ProfessorEntity> professorEntities;
+
+  List<SubjectEntity> subjectEntityList;
 }

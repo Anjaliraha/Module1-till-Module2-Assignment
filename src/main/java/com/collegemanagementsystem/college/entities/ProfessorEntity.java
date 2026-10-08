@@ -1,32 +1,25 @@
 package com.collegemanagementsystem.college.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Getter
 @Setter
+@Getter
+@ToString
+@AllArgsConstructor
 @NoArgsConstructor
 public class ProfessorEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "professor_seq_id")
-  @SequenceGenerator(
-      name = "professor_seq_id",
-      sequenceName = "professor_seq_id",
-      initialValue = 2001)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long professorId;
 
-  private String professorName;
+  private String title;
 
-  @ManyToMany(mappedBy = "professorList")
-  @JsonIgnore
-  private List<SubjectEntity> subjectList;
+  @OneToMany(mappedBy = "professor")
+  private List<SubjectEntity> subjectEntityList;
 
-  @ManyToMany(mappedBy = "professorList")
-  @JsonIgnore
-  private List<StudentEntity> studentList;
+  @ManyToMany(mappedBy = "professorEntities")
+  private List<StudentEntity> studentEntitiesList;
 }
